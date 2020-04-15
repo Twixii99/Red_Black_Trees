@@ -1,14 +1,23 @@
 package eg.edu.alexu.csd.filestructure.redblacktree;
 
+import java.util.Map;
+
 public class Node<T extends Comparable<T>, V> implements INode {
-    private INode parent = null;
-    private INode leftChild = null;
-    private INode rightChild = null;
+    public static INode NullNode = new Node(INode.BLACK,true);
+    private INode parent = NullNode;
+    private INode leftChild = NullNode;
+    private INode rightChild = NullNode;
     private T key;
     private V val;
     private boolean color = BLACK;
+    private boolean isNull = false;
 
     public Node() {
+    }
+
+    public Node(boolean color,boolean isNull) {
+        this.color = color;
+        this.isNull = isNull;
     }
 
     public Node(T key, V val, boolean color) {
@@ -64,7 +73,7 @@ public class Node<T extends Comparable<T>, V> implements INode {
 
     @Override
     public void setValue(Object value) {
-        this.val = val;
+        this.val = (V)value;
     }
 
     @Override
@@ -79,6 +88,6 @@ public class Node<T extends Comparable<T>, V> implements INode {
 
     @Override
     public boolean isNull() {
-        return this.equals(null);
+        return isNull;
     }
 }
